@@ -12,7 +12,7 @@ navbar:
     - text: 'Analysis'
       href: analysis.html
     - text: 'Shiny App'
-      href: shiny.html
+      href: shiny_app.html
     - text: 'Findings&Conclusion'
       href: result.html
     - text: 'Report'
