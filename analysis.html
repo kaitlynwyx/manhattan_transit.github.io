@@ -11,7 +11,7 @@
 
 
 
-<title>index.knit</title>
+<title>analysis.knit</title>
 
 <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -29,6 +29,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
@@ -224,6 +227,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -231,6 +297,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -301,45 +377,61 @@ $(document).ready(function () {
 </div>
 
 
-<style type="text/css">
-.container_video {
-    position: relative;
-    width: 90%;
-    height: 0;
-    padding-bottom: 56.25%;
+<div id="analysis" class="section level1">
+<h1>Analysis</h1>
+<p>Analysis methods here is simple and straightforward. We find that the velocity fits gaussian distribution well. a simple <code>t.test()</code> or <code>aov()</code> test will be good. Since we are considering a more detailed location based model. multinomial mixed logistic model which is generally the best model for transportation decision question is not necessary here. We have the following function to make the selection process tidy and we will adopt <code>data.table</code> all the time to make the deployment effcient. Here is a sample function for analysis on our website. We can analysis result from any scale simply by cancel some key variables</p>
+<pre class="r"><code>test_function = function(month_in, week_in, data = test_dt,PU,DO, distance_range_low = 0, distance_range_up = 6){
+  x = data[month %in% month_in][week %in% week_in][type == &#39;taxi&#39;][trip_distance &gt;= 1000*distance_range_low][trip_distance &lt;= 1000*distance_range_up][PUZone == PU][DOZone == DO][,.(velocity)]
+  x %&gt;% hist()
+  y = data[month %in% month_in][week %in% week_in][type == &#39;bike&#39;][trip_distance &gt;= 1000*distance_range_low][trip_distance &lt;= 1000*distance_range_up][PUZone == PU][DOZone == DO][,.(velocity)]
+  hist(as.numeric(as.data.frame(y)))
+  z = data[month %in% month_in][week %in% week_in][type == &#39;bike&#39;][trip_distance &gt;= 1000*distance_range_low][trip_distance &lt;= 1000*distance_range_up][PUZone == PU][DOZone == DO][,.(velocity)]
+  hist(as.numeric(as.data.frame(z)))
 }
-.container_video iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-</style>
-<h1>
-<b>
-<center>
-Fastest Way to Get Around in Manhattan
-</center>
-</b>
-</h1>
-<center>
-Keming Zhang, Junzhe Shao, Fengjia Chen, Yuchen Zheng, Kaitlyn Wang
-</center>
-<p><img src="picture/nyc.png" /></p>
-<div id="introduction" class="section level2">
-<h2><strong>Introduction</strong></h2>
-<p>Have you ever been stuck in the NYC subway with no signal on? In a car that does not move at all? Have you ever noticed any citibike station when you’re wandering on the street? Do you ever wonder which transportation is the best time-saving option in Manhattan? If yes, then you are at the right place!</p>
-<p>Welcome to our project, and let us present to you our findings on the fastest way to get around in Manhattan and guide you through our interactive map where you can estimate travel time using each transportation at different time periods of the year/day with just several clicks!</p>
-<p>*video</p>
+test_function(month_in = c(1,6,7),week_in = c(1,2,3), PU = &quot;Washington Heights South&quot;, DO = &quot;Morningside Heights&quot;,
+              distance_range_low = 0, distance_range_up = 20, data = rbind(test_dt,test_mta_final))</code></pre>
+<p>Afterwards we can extract the mean estimate and a p.value based on either t.test or ANOVA.</p>
 </div>
-<div id="motivation" class="section level2">
-<h2><strong>Motivation</strong></h2>
-<p>The initial idea of the project arose when we decided to give ourselves a little break after struggling for so long on deciding what project to do. We started chitchatting, and through our conversation, we realized that we all commute to school via different transportation. We have one person driving, one taking the subway, one riding citibike and two taking the bus. As we were complaining about the transportation system and bad traffic in the city, we all agreed on doing a project that could help people choose the most time-saving and cost-effective transportation in Manhattan. Inspired by the paper <em>Hail a cab or ride a bike? A travel time comparison of taxi and bicycle-sharing systems in New York City</em>, we are interested in whether bicycles can compete with other transportation in terms of travel time in Manhattan in 2020 to 2021 specifically.</p>
+<div id="regression" class="section level1">
+<h1>Regression</h1>
+<p>A regression analysis on</p>
+<pre class="r"><code>lm_velocity &lt;-
+  weather_df %&gt;%
+  filter(type == &quot;bike&quot;) %&gt;%
+  mutate(month = as.factor(month)) %&gt;%
+  drop_na()
+lm(velocity ~ trip_distance + awnd + prcp + snwd + tmax + tmin, data = weather_df) %&gt;% summary()</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = velocity ~ trip_distance + awnd + prcp + snwd + 
+##     tmax + tmin, data = weather_df)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -6.7541 -1.0397 -0.1460  0.8276  9.9388 
+## 
+## Coefficients:
+##                 Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    3.260e+00  1.628e-01  20.024  &lt; 2e-16 ***
+## trip_distance  3.871e-04  1.496e-05  25.870  &lt; 2e-16 ***
+## awnd           2.100e-03  3.723e-03   0.564  0.57279    
+## prcp           1.235e-03  4.769e-04   2.589  0.00968 ** 
+## snwd           4.553e-04  8.801e-04   0.517  0.60495    
+## tmax           5.386e-04  1.109e-03   0.486  0.62708    
+## tmin          -3.978e-03  1.239e-03  -3.209  0.00135 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.76 on 2871 degrees of freedom
+##   (86 observations deleted due to missingness)
+## Multiple R-squared:  0.2089, Adjusted R-squared:  0.2073 
+## F-statistic: 126.4 on 6 and 2871 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -377,6 +469,35 @@ $(document).ready(function () {
 });
 </script>
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
