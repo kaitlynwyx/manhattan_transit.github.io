@@ -18,6 +18,8 @@ output:
 
 * [New York City MTA](https://transitfeeds.com/p/mta) : The NYC subway schedule was obtained from the NYC MTA website, which includes 1000 trains' information on stops, arrival and departure time etc. 
 
+* [Climate Data Online](https://www.ncdc.noaa.gov/cdo-web/) : Weather data were chosen from Jun. 2020 to May 2021 with information on months, precipitation etc.
+
 ## Data Cleaning
 
 ### General Techniques
