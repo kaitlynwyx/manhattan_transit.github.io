@@ -1,0 +1,22 @@
+---
+title: "map"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+
+
+
+interactive map:   
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
