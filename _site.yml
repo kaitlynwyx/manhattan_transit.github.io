@@ -11,6 +11,8 @@ navbar:
       href: data.html
     - text: 'Analysis'
       href: analysis.html
+    - text: 'Shiny App'
+      href: shiny.html
     - text: 'Findings&Conclusion'
       href: result.html
     - text: 'Report'
