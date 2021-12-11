@@ -378,7 +378,7 @@ div.tocify {
 
 
 <div id="data-sources" class="section level2">
-<h2>Data Sources</h2>
+<h2><strong>Data Sources</strong></h2>
 <ul>
 <li><a href="https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page">NYC Taxi Trip Record Data</a> : We obtained the yellow taxi, green taxi and taxi zone lookup table from this website. The original yellow and green taxi datasets contain files from Jan. 2020 to Jul. 2021 with 33,671,276 and 749,439 observations, respectively. The taxi zone lookup table is shown below.</li>
 </ul>
@@ -392,7 +392,7 @@ div.tocify {
 </ul>
 </div>
 <div id="data-cleaning" class="section level2">
-<h2>Data Cleaning</h2>
+<h2><strong>Data Cleaning</strong></h2>
 <div id="general-techniques" class="section level3">
 <h3>General Techniques</h3>
 <p>The original dataset of taxi and bike is huge, contains ~30,000,000 each. So <code>dplyr</code> package is not suitable for that large amont of data which may be intensive for memeory and compuation. To handle tabular data, <code>data.table</code> is an alternative to R’s default <code>data.frame</code> or <code>tibble</code>. Its popularity stems from the speed with which it can process enormous amounts of data and the brevity of its syntax. As a result, you enter less code and move at a far faster pace.</p>
