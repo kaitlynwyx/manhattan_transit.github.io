@@ -174,7 +174,7 @@ comb_df %>%
 
 This velocity boxplot compares the travel velocity on weekdays and weekends for each type of transportation. From this plot we can see that the velocities for subway on both weekdays and weekend are the greatest and they are similar across the week. Taxi travels faster on the weekend and bike travels faster on weekdays.    
 
-## Visualization
+## Weather Influence
 
 ```{r input data and clean, message=FALSE}
 # Read velocity dataset.   
@@ -200,6 +200,8 @@ weather_transport_df <-
   mutate(type = as.factor(type))
 ```
 
+### Transportation Trend vs Month
+
 ```{r transportation trends among months, message=FALSE}
 # popular of transportation vs month
 weather_transport_df %>% 
@@ -218,7 +220,7 @@ weather_transport_df %>%
 
 The trends for people choose to travel outside are generally similar no matter using bikes or cabs. But it exists a more significant drop for choosing taxi during the June and less people ride bikes during Dec and Feb. After analyzing the possible casuals, June is the month for students within NYU start their Summer Vacations. So the traffic pressure has a visualized decrease with more people still live in NYU. And for people, especially students, who still live in NYU, they do not have the need to commute in a hurry. Also, with the temperature getting colder and colder, people will prefer more stay at home comparing to traveling and less possibility for them to riding bikes outside. The temperature of the weather could be a confounder to transport choice and month model, but not for special month June. 
 
-
+### Wind Speed vs Velocity
 ```{r wind speed(mm) vs velocity, message=FALSE}
 # wind speed (mm) vs velocity
 weather_transport_df %>% 
@@ -234,6 +236,8 @@ weather_transport_df %>%
 ```
   
 It's interesting to find out the truth that following by the increasing of wind speed, a linear regression model could be explored between the velocity of bike riders and wind speed and velocity of bikes is increasing as well. While at the same time, wind speed does no influence to taxi drivers.  
+
+### Rain Precipitation vs Velocity  
 
 ```{r precipitation with velocity and total number of specific transport, message=FALSE}
 # Precipitation(mm) vs velocity
@@ -266,6 +270,10 @@ prcp_vel + prcp_trans
 
 Velocity could be regarded as one parameter to judge the flow of a transportation. Obviously from the plots showing the connection between the velocity and the mode of transport, the velocity of taxi are faster to bike on average. And the light to moderate rain (<30 mm), precipitation seems have no impact to the velocity, especially while taking a look at bike data. That might because though raining will make road more slippery, it also has washing effect to environment and other effects. The combination of all effects make velocity nearly stay the same. Moreover, the more amount of rain is, the slower the traffic it would be, the less people would choose to travel and it is more likely to choose taxi while weather condition getting even worse compared to riding. That might because a heavy rain might possibly affect drivers and riders visibility, thus decreases the vehicle speed and affects travel choice. 
 
+### Temperature vs Transportation trends vs Velocity
+  
+#### High Temperature Influence  
+
 ```{r show high T connection, message=FALSE}
 # High Temperature vs transportation choice. 
 ht_trans <- 
@@ -295,6 +303,8 @@ ht_vel <-
 
 ht_trans + ht_vel
 ```
+
+#### Low Temperature Influence  
 
 ```{r low temperature connection, message=FALSE}
 # Low Temperature vs transportation choice. 

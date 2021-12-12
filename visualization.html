@@ -522,8 +522,8 @@ comb_df = bind_rows(taxi_df_sample, bike_df_sample, subway_df_sample)</code></pr
 <p><img src="visualization_files/figure-html/unnamed-chunk-11-1.png" width="90%" /></p>
 <p>This velocity boxplot compares the travel velocity on weekdays and weekends for each type of transportation. From this plot we can see that the velocities for subway on both weekdays and weekend are the greatest and they are similar across the week. Taxi travels faster on the weekend and bike travels faster on weekdays.</p>
 </div>
-<div id="visualization-1" class="section level2">
-<h2>Visualization</h2>
+<div id="weather-influence" class="section level2">
+<h2>Weather Influence</h2>
 <pre class="r"><code># Read velocity dataset.   
 test_df &lt;- read_csv(&quot;../P8105-Final-Project/data/test_dt_V1.csv&quot;)
 # Select data with time range
@@ -545,6 +545,8 @@ weather_transport_df &lt;-
   left_join(test_df, weather_df, by = &quot;date&quot;) %&gt;%
   dplyr::select(trip_distance, type, month, velocity, date, awnd, prcp, snwd, tmax, tmin, tsun) %&gt;% 
   mutate(type = as.factor(type))</code></pre>
+<div id="transportation-trend-vs-month" class="section level3">
+<h3>Transportation Trend vs Month</h3>
 <pre class="r"><code># popular of transportation vs month
 weather_transport_df %&gt;% 
   mutate(month = as.factor(month)) %&gt;% 
@@ -560,6 +562,9 @@ weather_transport_df %&gt;%
     theme(plot.title = element_text(hjust = 0.5))</code></pre>
 <p><img src="visualization_files/figure-html/transportation%20trends%20among%20months-1.png" width="90%" /></p>
 <p>The trends for people choose to travel outside are generally similar no matter using bikes or cabs. But it exists a more significant drop for choosing taxi during the June and less people ride bikes during Dec and Feb. After analyzing the possible casuals, June is the month for students within NYU start their Summer Vacations. So the traffic pressure has a visualized decrease with more people still live in NYU. And for people, especially students, who still live in NYU, they do not have the need to commute in a hurry. Also, with the temperature getting colder and colder, people will prefer more stay at home comparing to traveling and less possibility for them to riding bikes outside. The temperature of the weather could be a confounder to transport choice and month model, but not for special month June.</p>
+</div>
+<div id="wind-speed-vs-velocity" class="section level3">
+<h3>Wind Speed vs Velocity</h3>
 <pre class="r"><code># wind speed (mm) vs velocity
 weather_transport_df %&gt;% 
   group_by(type, awnd) %&gt;% 
@@ -573,6 +578,9 @@ weather_transport_df %&gt;%
     theme(plot.title = element_text(hjust = 0.5))</code></pre>
 <p><img src="visualization_files/figure-html/wind%20speed(mm)%20vs%20velocity-1.png" width="90%" /></p>
 <p>It’s interesting to find out the truth that following by the increasing of wind speed, a linear regression model could be explored between the velocity of bike riders and wind speed and velocity of bikes is increasing as well. While at the same time, wind speed does no influence to taxi drivers.</p>
+</div>
+<div id="rain-precipitation-vs-velocity" class="section level3">
+<h3>Rain Precipitation vs Velocity</h3>
 <pre class="r"><code># Precipitation(mm) vs velocity
 prcp_vel &lt;-
   weather_transport_df %&gt;% 
@@ -601,6 +609,11 @@ prcp_trans &lt;-
 prcp_vel + prcp_trans</code></pre>
 <p><img src="visualization_files/figure-html/precipitation%20with%20velocity%20and%20total%20number%20of%20specific%20transport-1.png" width="90%" /></p>
 <p>Velocity could be regarded as one parameter to judge the flow of a transportation. Obviously from the plots showing the connection between the velocity and the mode of transport, the velocity of taxi are faster to bike on average. And the light to moderate rain (&lt;30 mm), precipitation seems have no impact to the velocity, especially while taking a look at bike data. That might because though raining will make road more slippery, it also has washing effect to environment and other effects. The combination of all effects make velocity nearly stay the same. Moreover, the more amount of rain is, the slower the traffic it would be, the less people would choose to travel and it is more likely to choose taxi while weather condition getting even worse compared to riding. That might because a heavy rain might possibly affect drivers and riders visibility, thus decreases the vehicle speed and affects travel choice.</p>
+</div>
+<div id="temperature-vs-transportation-trends-vs-velocity" class="section level3">
+<h3>Temperature vs Transportation trends vs Velocity</h3>
+<div id="high-temperature-influence" class="section level4">
+<h4>High Temperature Influence</h4>
 <pre class="r"><code># High Temperature vs transportation choice. 
 ht_trans &lt;- 
   weather_transport_df %&gt;% 
@@ -629,6 +642,9 @@ ht_vel &lt;-
 
 ht_trans + ht_vel</code></pre>
 <p><img src="visualization_files/figure-html/show%20high%20T%20connection-1.png" width="90%" /></p>
+</div>
+<div id="low-temperature-influence" class="section level4">
+<h4>Low Temperature Influence</h4>
 <pre class="r"><code># Low Temperature vs transportation choice. 
 lt_trans &lt;- 
   weather_transport_df %&gt;% 
@@ -659,6 +675,8 @@ lt_vel &lt;-
 lt_trans + lt_vel</code></pre>
 <p><img src="visualization_files/figure-html/low%20temperature%20connection-1.png" width="90%" /></p>
 <p>The distribution and trends of travel choice among taxi and bikes are distint different. People tend to choose taxi travel plan while in relatively low temperature and will change to bike preference when there is significant increase in temperature. People have more possibility to stay home when meet with extreme high temperature. It could be concluded that people are more willing to travel outside under the moderate temperature, the higher, lower or even extreme temperature the weather is, the less potential likelihood that people will go outside and use the transport. It also comes an interesting phenomenon that taxi tends to run faster and bike runs slower with the temperature increase. The faster of the taxi could because of the decrease of the traffic pressure and the better road condition. At the same time, snow effect makes riders drive quicker for getting avoid of staying outside and keep warm.</p>
+</div>
+</div>
 </div>
 
 
