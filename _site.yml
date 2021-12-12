@@ -16,9 +16,9 @@ navbar:
     - text: 'Report'
       href: report.html
     - icon: fa-envelope fa-lg
-      href: mailto:<abc@xyz.com>
+      href: mailto:<js5959@columbia.edu>
     - icon: fa-youtube fa-lg
-      href: https://www.youtube.com/
+      href: https://www.youtube.com/watch?v=3eZiVvfCA9Q
     - icon: fa-github fa-lg
       href: https://github.com/Junzheshao5959/P8105-Final-Project
 

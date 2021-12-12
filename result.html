@@ -9,11 +9,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Junzhe Shao" />
 
-<meta name="date" content="2021-12-11" />
 
-<title>result</title>
+<title>result.knit</title>
 
 <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -347,13 +345,13 @@ div.tocify {
   <a href="report.html">Report</a>
 </li>
 <li>
-  <a href="mailto:&lt;abc@xyz.com&gt;">
+  <a href="mailto:&lt;js5959@columbia.edu&gt;">
     <span class="fa fa-envelope fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://www.youtube.com/">
+  <a href="https://www.youtube.com/watch?v=3eZiVvfCA9Q">
     <span class="fa fa-youtube fa-lg"></span>
      
   </a>
@@ -381,17 +379,53 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">result</h1>
-<h4 class="author">Junzhe Shao</h4>
-<h4 class="date">12/11/2021</h4>
 
 </div>
 
 
-<div id="the-velocity-of-taxi-zones" class="section level1">
-<h1><strong>The Velocity of Taxi Zones</strong></h1>
-<p>As we know the midtown of Manhattan is known for its bustling and busy traffic, the mean velocity in midtown is significantly slower compared to neighborhoods in Uppertown and Downtown. Moreover, the velocity in Uppertown and Randalls Island would be even quicker. We notice that the traffic on Randalls Island usually performs better, and this might because of the lower population density. We also known from the web that this is a parkland island and there is no residential housing for the general public except for some public facilities. And the specific traffic time would be more dependent on where you are coming from and where you are going to.</p>
-<p>What is worth emphasizing here is that the more taxi zones that you cross, the faster velocity that we might obtain no matter where our pick up location is and what our transport is. We guess it might be because of the longer travel distance we have, the drivers or riders would more likely to choose the high way, the road with low traffic and avoid traffic lights</p>
+<div id="the-velocity-distribution-of-taxi-zones" class="section level2">
+<h2><strong>The Velocity Distribution of Taxi Zones</strong></h2>
+<div id="bike" class="section level3">
+<h3>Bike</h3>
+<p>The velocity of bike among different taxi zones is various according to the distance of every taxi zones to <em>Washington Heights South</em>. However, possibly contrary to the usual hypothesis, <em>the average velocity of bike increases with distance increasing</em>! We think there are two possible reasons lead to this phenomenon. One explanation is that those who have to ride for long distance borrow electric bikes at the beginning, which are apparently faster than the usual bikes. Another explanation is that those who choose to ride to far places have better physical strength. Therefore, they can ride faster than usual riders.</p>
+<center>
+<img src="picture/SpeedBike.png" style="width:80%">
+</center>
+<p>   </p>
+</div>
+<div id="taxi" class="section level3">
+<h3>Taxi</h3>
+<p>What is worth emphasizing here is that the more taxi zones that you cross, the faster velocity that we might obtain no matter where our pick up location is and what our transport is. We guess it might be because of the longer travel distance we have, the drivers or riders would more likely to choose the high way, the road with low traffic and avoid traffic lights.s we know the midtown of Manhattan is known for its bustling and busy traffic, the mean velocity in midtown is significantly slower compared to neighborhoods in Uppertown and Downtown.</p>
+<p><em>Downtown traffic for rush day:</em></p>
+<p><img src="picture/downtown_heat.png" /></p>
+<p><em>The more taxi zones that you cross, the faster velocity that we might obtain no matter where our pick up location is:</em></p>
+<p><img src="picture/uptown%20heat.png" /></p>
+<p>Moreover, the velocity in Uppertown and Randalls Island would be even quicker. We notice that the traffic on Randalls Island usually performs better, and this might because of the lower population density. We also known from the web that this is a parkland island and there is no residential housing for the general public except for some public facilities. And the specific traffic time would be more dependent on where you are coming from and where you are going to.</p>
+<p><em>Uppertown and Randalls Island would be even quicker:</em></p>
+<p><img src="picture/mid%20town%20heat.png" /></p>
+<p><br />
+ </p>
+</div>
+<div id="subway" class="section level3">
+<h3>Subway</h3>
+<p>The average velocity of subway is quit stable among different taxi zones on the subway line. Possibly more influenced by the waiting time on the station platform, subways are not influenced by the traffic jam.</p>
+<center>
+<img src="picture/SpeedSubway.png" style="width:80%">
+</center>
+<p><br />
+<br />
+<br />
+<br />
+</p>
+</div>
+</div>
+<div id="fastest-way-to-get-around-in-manhattan-a-summary" class="section level2">
+<h2><strong>Fastest Way to Get Around in Manhattan: A Summary</strong></h2>
+<p>As is shown in data exploration, taxi is faster than bike in terms of mean velocity. And the difference is significant. Where MTA is always reliable, but we should note that MTA has its own schedule, so we need to consider extra time for waiting and walking. <img src="picture/school_non_equal.png" alt="General case: MTA&gt;taxi&gt;bike" /> But when you are in downtown manhattan at a week day rush hour , We can discover that bike become competitive for a short trip. For example:</p>
+<p><img src="picture/downtown_test_equal.png" alt="busy downtown for taxi" /> While in weekend or non rush hour, taxi will still be faster than bike in downtown Manhattan for a short trip. <img src="picture/close_non_equal.png" /></p>
+<p><br />
+<br />
+</p>
 </div>
 
 

@@ -5,8 +5,8 @@ output: html_document
 
 ## __Interactive Maps__
 The data visualization above is an overall analysis, in order to analyze the velocity between from one taxi zone to the others through different vehicles and show their geographical locations clearly, we created ___two interactive map applications___ using `R Shiny`.   
-  
-#### [**Velocity Heatmap**](http://34.138.2.255:3838/heatmap/)    
+
+#### [**Velocity Heatmap, click it!**](http://34.138.2.255:3838/heatmap/)    
 Velocity heatmap is aimed to provide a tool to better analyze the velocity differences among different taxi zones during different times of the day in different months. To create this velocity heatmap, we first integrated the leaflet package to incorporate a worldwide map, drew polygons on Manhattan and divided the areas based on the taxi zone map. Adding click actions on the map is also necessary for there are 69 taxi zones, making it hard to select taxi zones through traditional methods, like select boxes.  
   
 Users are able to navigate through this velocity heatmap by selecting desired zone, vehicle type, month, day and time to compare the speed. By clicking the relative taxi zone as our departure, it helps to explore and calculate the mean speed rate to different taxi zones, and create interactive plots that respond to each mouse event, combined with R’s graphics functions.  
@@ -17,7 +17,7 @@ Users are able to navigate through this velocity heatmap by selecting desired zo
 
 <center/>
   
-#### [**Choose Best Vehicle**](http://34.138.2.255:3838/bestvehicle/)  
+#### [**Choose Best Vehicle, click it!**](http://34.138.2.255:3838/bestvehicle/)  
 Besides comparing the speed from a fixed taxi zone to others, we also create an interactive map application to compare the speed from one taxi zone to another through taxi, bike and subway to see which one is the best during different times of the day in different months.  
   
 While using this app, the users would be able to choose whatever the departure taxi zone and destination taxi zone are within Manhattan using graphic straightforward clicking. With the synchronous web search for either pick up or drop off location.

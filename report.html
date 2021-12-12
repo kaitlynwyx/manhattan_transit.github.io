@@ -345,13 +345,13 @@ div.tocify {
   <a href="report.html">Report</a>
 </li>
 <li>
-  <a href="mailto:&lt;abc@xyz.com&gt;">
+  <a href="mailto:&lt;js5959@columbia.edu&gt;">
     <span class="fa fa-envelope fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://www.youtube.com/">
+  <a href="https://www.youtube.com/watch?v=3eZiVvfCA9Q">
     <span class="fa fa-youtube fa-lg"></span>
      
   </a>
@@ -390,9 +390,16 @@ Fastest Way to Get Around in Manhattan
 </center>
 </b>
 </h1>
+<p><br />
+</p>
 <center>
 Keming Zhang, Junzhe Shao, Fengjia Chen, Yuchen Zheng, Kaitlyn Wang
 </center>
+<center>
+* All the members contributed equally.
+</center>
+<p><br />
+</p>
 <div id="motivation-related-work" class="section level2">
 <h2><strong>Motivation &amp; Related Work</strong></h2>
 <p>According to the INRIX scorecard, NYC is ranked No.1 for the worst traffic in the United States. In such an urban region with a dense population, people who do not wish to use personal vehicles have other transportation options such as bike, subway, bus, or taxi. Although it might seem obvious that riding a bike would not outcompete other transportations in a long travel distance at first glance, we want to examine whether this is true in Manhattan, given that its traffic is on the top list of worst traffic in the country. Inspired by the paper Hail a cab or ride a bike? A travel time comparison of taxi and bicycle-sharing systems in New York City, we are interested in whether bicycles can compete with other transportations in terms of travel time in Manhattan in 2020 to 2021 specifically. Considering the weather, rush hour, subway traffic in Manhattan, we focused on the time in a day, weekday versus weekend and seasonal variation to investigate the best time-saving way to commute all year round. Our final goal is to make an interactive map and dashboards that shows the estimated travel time using different transportations at different time periods of the year by just one click! It is expected to be a marketing tool to help those in need of public transportation in NYC to decide the most time-saving and cost-effective way to travel.</p>
@@ -557,6 +564,19 @@ test_mta_final = test_mta_dt[,colnames(test_dt), with = F]</code></pre>
 </div>
 <div id="weather-influence" class="section level3">
 <h3>Weather Influence</h3>
+<p>Transportation Trend vs Month The trends for people choose to travel outside are generally similar no matter using bikes or cabs. But it exists a more significant drop for choosing taxi during the June and less people ride bikes during Dec and Feb. After analyzing the possible casuals, June is the month for students within NYU start their Summer Vacations. So the traffic pressure has a visualized decrease with more people still live in NYU. And for people, especially students, who still live in NYU, they do not have the need to commute in a hurry. Also, with the temperature getting colder and colder, people will prefer more stay at home comparing to traveling and less possibility for them to riding bikes outside. The temperature of the weather could be a confounder to transport choice and month model, but not for special month June.</p>
+<div id="wind-speed-vs-velocity" class="section level4">
+<h4>Wind Speed vs Velocity</h4>
+<p>It’s interesting to find out the truth that following by the increasing of wind speed, velocity of bikes is increasing as well. While at the same time, wind speed does nearly no influence to taxi drivers.</p>
+</div>
+<div id="rain-precipitation-vs-velocity" class="section level4">
+<h4>Rain Precipitation vs Velocity</h4>
+<p>Velocity could be regarded as one parameter to judge the flow of a transportation. Obviously from the plots showing the connection between the velocity and the mode of transport, the velocity of taxi are faster to bike on average. And the light to moderate rain (&lt;30 mm), precipitation seems have no impact to the velocity, especially while taking a look at bike data. That might because though raining will make road more slippery, it also has washing effect to environment and other effects. The combination of all effects make velocity nearly stay the same. Moreover, the more amount of rain is, the slower the traffic it would be, the less people would choose to travel and it is more likely to choose taxi while weather condition getting even worse compared to riding. That might because a heavy rain might possibly affect drivers and riders visibility, thus decreases the vehicle speed and affects travel choice.</p>
+</div>
+<div id="temperature-vs-transportation-trends-vs-velocity" class="section level4">
+<h4>Temperature vs Transportation trends vs Velocity</h4>
+<p>The distribution and trends of travel choice among taxi and bikes are distinct different. People tend to choose taxi travel plan while in relatively low temperature and will change to bike preference when there is significant increase in temperature. People have more possibility to stay home when meet with extreme high temperature. It could be concluded that people are more willing to travel outside under the moderate temperature, the higher, lower or even extreme temperature the weather is, the less potential likelihood that people will go outside and use the transport. It also comes an interesting phenomenon that taxi tends to run faster and bike runs slower with the temperature increase. The faster of the taxi could because of the decrease of the traffic pressure and the better road condition. At the same time, snow effect makes riders drive quicker for getting avoid of staying outside and keep warm.</p>
+</div>
 </div>
 </div>
 <div id="exploratory-analysis" class="section level2">
@@ -578,42 +598,158 @@ test_function(month_in = c(1,6,7),week_in = c(1,2,3), PU = &quot;Washington Heig
 </div>
 <div id="regression" class="section level3">
 <h3>Regression</h3>
-<p>A regression analysis on</p>
+<p>We wound like to address a regression analysis to given out a more precise description of how climate factors affect the velocity besides initial data exploration.</p>
+<p>For bike data:</p>
 <pre class="r"><code>lm_velocity &lt;-
   weather_df %&gt;%
   filter(type == &quot;bike&quot;) %&gt;%
-  mutate(month = as.factor(month)) %&gt;%
-  drop_na()
-lm(velocity ~ trip_distance + awnd + prcp + snwd + tmax + tmin, data = weather_df) %&gt;% summary()</code></pre>
+  mutate(month = as.factor(month)) %&gt;% as.data.frame()
+
+lm(velocity ~ trip_distance + awnd + prcp + snwd + tmax + tmin, data = lm_velocity) %&gt;% summary()</code></pre>
 <pre><code>## 
 ## Call:
 ## lm(formula = velocity ~ trip_distance + awnd + prcp + snwd + 
-##     tmax + tmin, data = weather_df)
+##     tmax + tmin, data = lm_velocity)
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -6.7541 -1.0397 -0.1460  0.8276  9.9388 
+## -3.2692 -0.7067  0.0901  0.7926  3.8033 
 ## 
 ## Coefficients:
 ##                 Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)    3.260e+00  1.628e-01  20.024  &lt; 2e-16 ***
-## trip_distance  3.871e-04  1.496e-05  25.870  &lt; 2e-16 ***
-## awnd           2.100e-03  3.723e-03   0.564  0.57279    
-## prcp           1.235e-03  4.769e-04   2.589  0.00968 ** 
-## snwd           4.553e-04  8.801e-04   0.517  0.60495    
-## tmax           5.386e-04  1.109e-03   0.486  0.62708    
-## tmin          -3.978e-03  1.239e-03  -3.209  0.00135 ** 
+## (Intercept)    2.646e+00  1.676e-01  15.785   &lt;2e-16 ***
+## trip_distance  1.844e-04  1.642e-05  11.233   &lt;2e-16 ***
+## awnd           5.446e-03  3.686e-03   1.477   0.1398    
+## prcp           9.348e-04  5.004e-04   1.868   0.0620 .  
+## snwd          -8.173e-04  1.249e-03  -0.654   0.5130    
+## tmax           5.846e-04  1.125e-03   0.520   0.6035    
+## tmin          -2.337e-03  1.209e-03  -1.933   0.0534 .  
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 1.76 on 2871 degrees of freedom
-##   (86 observations deleted due to missingness)
-## Multiple R-squared:  0.2089, Adjusted R-squared:  0.2073 
-## F-statistic: 126.4 on 6 and 2871 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 1.2 on 1417 degrees of freedom
+##   (60 observations deleted due to missingness)
+## Multiple R-squared:  0.09777,    Adjusted R-squared:  0.09395 
+## F-statistic: 25.59 on 6 and 1417 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>We can discover that the regression coefficient for <code>prcp</code>,<code>tmin</code>,<code>trip_distance</code> is significant under 0.1 significance level.</p>
+<p>The estimates are:</p>
+<ul>
+<li><code>prcp</code>: 9.348e-04</li>
+<li><code>tmin</code>: -2.337e-03</li>
+<li><code>trip_distance</code>: 1.844e-04</li>
+</ul>
+<p>This is consistent with our initial data visualizaiton findings.</p>
+<p>For taxi data:</p>
+<pre class="r"><code>lm_velocity &lt;-
+  weather_df %&gt;%
+  filter(type == &quot;taxi&quot;) %&gt;%
+  mutate(month = as.factor(month)) %&gt;% as.data.frame()
+lm(velocity ~ trip_distance + awnd + prcp + snwd + tmax + tmin, data = lm_velocity) %&gt;% summary()</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = velocity ~ trip_distance + awnd + prcp + snwd + 
+##     tmax + tmin, data = lm_velocity)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.9772 -1.1170 -0.3150  0.7746  8.4551 
+## 
+## Coefficients:
+##                 Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    3.753e+00  2.162e-01  17.360   &lt;2e-16 ***
+## trip_distance  4.114e-04  1.937e-05  21.235   &lt;2e-16 ***
+## awnd           1.084e-03  5.103e-03   0.212    0.832    
+## prcp          -1.055e-04  6.255e-04  -0.169    0.866    
+## snwd           1.690e-04  1.011e-03   0.167    0.867    
+## tmax           1.163e-03  1.493e-03   0.779    0.436    
+## tmin          -1.166e-03  1.739e-03  -0.671    0.503    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.745 on 1447 degrees of freedom
+##   (26 observations deleted due to missingness)
+## Multiple R-squared:  0.2389, Adjusted R-squared:  0.2357 
+## F-statistic: 75.69 on 6 and 1447 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>We can see that only <code>trip_distance</code> is significant, which is consistent with our prior knowledge and the data exploration before.</p>
 </div>
 </div>
 <div id="interaction-map" class="section level2">
 <h2><strong>Interaction Map</strong></h2>
+<p>he data visualization above is an overall analysis, in order to analyze the velocity between from one taxi zone to the others through different vehicles and show their geographical locations clearly, we created <strong><em>two interactive map applications</em></strong> using <code>R Shiny</code>.</p>
+<div id="velocity-heatmap" class="section level4">
+<h4><a href="http://34.138.2.255:3838/heatmap/"><strong>Velocity Heatmap</strong></a></h4>
+<p>Velocity heatmap is aimed to provide a tool to better analyze the velocity differences among different taxi zones during different times of the day in different months. To create this velocity heatmap, we first integrated the leaflet package to incorporate a worldwide map, drew polygons on Manhattan and divided the areas based on the taxi zone map. Adding click actions on the map is also necessary for there are 69 taxi zones, making it hard to select taxi zones through traditional methods, like select boxes.</p>
+<p>Users are able to navigate through this velocity heatmap by selecting desired zone, vehicle type, month, day and time to compare the speed. By clicking the relative taxi zone as our departure, it helps to explore and calculate the mean speed rate to different taxi zones, and create interactive plots that respond to each mouse event, combined with R’s graphics functions.</p>
+<center>
+<p><img src="picture/velocity_map.png" width="700" /></p>
+<center/>
+</div>
+<div id="choose-best-vehicle" class="section level4">
+<h4><a href="http://34.138.2.255:3838/bestvehicle/"><strong>Choose Best Vehicle</strong></a></h4>
+<p>Besides comparing the speed from a fixed taxi zone to others, we also create an interactive map application to compare the speed from one taxi zone to another through taxi, bike and subway to see which one is the best during different times of the day in different months.</p>
+<p>While using this app, the users would be able to choose whatever the departure taxi zone and destination taxi zone are within Manhattan using graphic straightforward clicking. With the synchronous web search for either pick up or drop off location.</p>
+<center>
+<p><img src="picture/choose_best_vehicle.png" width="700" /></p>
+<center/>
+</div>
+</div>
+<div id="problems-we-met" class="section level2">
+<h2><strong>Problems We Met</strong></h2>
+<p>Some challenges arose during development using <code>R Shiny</code> and the <code>leaflet</code> package. We needed to divide the Manhattan region to different taxi zones on the map and identified each click response with the corresponding area range. During which we came up and identified several problems and solved those difficulties as described below:</p>
+<ul>
+<li><p><strong><em>Reducing dataset and identifying the information of taxi zones specifically within Manhattan.</em></strong><br />
+There was a large dataset we downloaded from the website which included all data within the NYC location. We targeted to reduce the size of the data and concentrated only on the Manhattan area. Among all the information, we first identified all taxi zone names in NYC and filtered them only within Manhattan that we focused on and recorded them with the new numbers from 1 to 69.</p></li>
+<li><p><strong><em>Draw map and draw zone polygons according to taxi zone division.</em></strong><br />
+Unlike worldwide maps that could be directly imported using <code>leaflet()</code>, the taxi zone division on Manhattan should be further processed. We downloaded a <a href="https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page">Manhattan data</a> from the web and got their location data after data cleaning. <code>addPolygons()</code> function required us to define the columns of latitude and longitude, which could be derived from our data, linking adjacent points using lines and creating shapes of interest.</p></li>
+<li><p><strong><em>What if the pick up location and drop off location are in the same taxi zone?</em></strong><br />
+Regarding our original code, the same location could not be clicked twice which means if we double click the same taxi zone and set it as both our origin and destination, the function would return <code>point_bool</code> parameter from <code>TRUE</code> to <code>FALSE</code> and led to visualization error. To solve this problem, we used the <code>if</code> function to specify this special situation.</p></li>
+<li><p><strong><em>Merging problems while cooperating with branches.</em></strong><br />
+We had several branches while we were dealing with our codes, and all codes would be pushed to our personal branch first before finally merging into the main branch. As we had two people mainly dealing with the <code>Shiny</code> application that needed cooperation work, it required a lot of merging process and there were several times when code overlapped or merging problems on local paths arose. Solving this problem required constant updates between members.</p></li>
+</ul>
+</div>
+<div id="findings-and-conclusions" class="section level2">
+<h2><strong>Findings and Conclusions</strong></h2>
+<div id="the-velocity-distribution-of-taxi-zones" class="section level3">
+<h3>The Velocity Distribution of Taxi Zones</h3>
+<div id="bike" class="section level4">
+<h4>Bike</h4>
+<p>The velocity of bike among different taxi zones is various according to the distance of every taxi zones to <em>Washington Heights South</em>. However, possibly contrary to the usual hypothesis, <em>the average velocity of bike increases with distance increasing</em>! We think there are two possible reasons lead to this phenomenon. One explanation is that those who have to ride for long distance borrow electric bikes at the beginning, which are apparently faster than the usual bikes. Another explanation is that those who choose to ride to far places have better physical strength. Therefore, they can ride faster than usual riders.</p>
+<center>
+<img src="picture/SpeedBike.png" style="width:80%">
+</center>
+<p>   </p>
+</div>
+<div id="taxi" class="section level4">
+<h4>Taxi</h4>
+<p>What is worth emphasizing here is that the more taxi zones that you cross, the faster velocity that we might obtain no matter where our pick up location is and what our transport is. We guess it might be because of the longer travel distance we have, the drivers or riders would more likely to choose the high way, the road with low traffic and avoid traffic lights.s we know the midtown of Manhattan is known for its bustling and busy traffic, the mean velocity in midtown is significantly slower compared to neighborhoods in Uppertown and Downtown.</p>
+<p><em>Downtown traffic for rush day:</em></p>
+<p><img src="picture/downtown_heat.png" /></p>
+<p><em>The more taxi zones that you cross, the faster velocity that we might obtain no matter where our pick up location is:</em></p>
+<p><img src="picture/uptown%20heat.png" /></p>
+<p>Moreover, the velocity in Uppertown and Randalls Island would be even quicker. We notice that the traffic on Randalls Island usually performs better, and this might because of the lower population density. We also known from the web that this is a parkland island and there is no residential housing for the general public except for some public facilities. And the specific traffic time would be more dependent on where you are coming from and where you are going to.</p>
+<p><em>Uppertown and Randalls Island would be even quicker:</em></p>
+<p><img src="picture/mid%20town%20heat.png" /></p>
+<p><br />
+ </p>
+</div>
+<div id="subway" class="section level4">
+<h4>Subway</h4>
+<p>The average velocity of subway is quit stable among different taxi zones on the subway line. Possibly more influenced by the waiting time on the station platform, subways are not influenced by the traffic jam.</p>
+<center>
+<img src="picture/SpeedSubway.png" style="width:80%">
+</center>
+<p><br />
+<br />
+<br />
+<br />
+</p>
+</div>
+</div>
+<div id="fastest-way-to-get-around-in-manhattan-a-summary" class="section level3">
+<h3>Fastest Way to Get Around in Manhattan: A Summary</h3>
+<p>As is shown in data exploration, taxi is faster than bike in terms of mean velocity. And the difference is significant. Where MTA is always reliable, but we should note that MTA has its own schedule, so we need to consider extra time for waiting and walking. <img src="picture/school_non_equal.png" alt="General case: MTA&gt;taxi&gt;bike" /> But when you are in downtown manhattan at a week day rush hour , We can discover that bike become competitive for a short trip. For example:</p>
+<p><img src="picture/downtown_test_equal.png" alt="busy downtown for taxi" /> While in weekend or non rush hour, taxi will still be faster than bike in downtown Manhattan for a short trip. <img src="picture/close_non_equal.png" /></p>
+</div>
 </div>
 
 
