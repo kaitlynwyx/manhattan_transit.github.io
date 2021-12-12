@@ -385,7 +385,7 @@ div.tocify {
 
 <div id="analysis" class="section level1">
 <h1><strong>Analysis</strong></h1>
-<p>Analysis methods here is simple and straightforward. We find that the velocity fits gaussian distribution well. a simple <code>t.test()</code> or <code>aov()</code> test will be good. Since we are considering a more detailed location based model. multinomial mixed logistic model which is generally the best model for transportation decision question is not necessary here. We have the following function to make the selection process tidy and we will adopt <code>data.table</code> all the time to make the deployment effcient. Here is a sample function for analysis on our website. We can analysis result from any scale simply by cancel some key variables</p>
+<p>Since our study use interactive map to visualize better, analysis methods here is simple and straightforward. We find that the velocity fits gaussian distribution well.A simple <code>t.test()</code> or <code>aov()</code> test will be good. Since we are considering a more detailed location based model. Multinomial Mixed Logistic model which is generally the best model for transportation decision question is not necessary here. We have the following function to make the selection process tidy and we will adopt <code>data.table</code> all the time to make the deployment effcient. Here is a sample function for analysis on our website. We can analysis result from any scale simply by cancel some key variables</p>
 <pre class="r"><code>test_function = function(month_in, week_in, data = test_dt,PU,DO, distance_range_low = 0, distance_range_up = 6){
   x = data[month %in% month_in][week %in% week_in][type == &#39;taxi&#39;][trip_distance &gt;= 1000*distance_range_low][trip_distance &lt;= 1000*distance_range_up][PUZone == PU][DOZone == DO][,.(velocity)]
   x %&gt;% hist()
@@ -400,38 +400,79 @@ test_function(month_in = c(1,6,7),week_in = c(1,2,3), PU = &quot;Washington Heig
 </div>
 <div id="regression" class="section level1">
 <h1><strong>Regression</strong></h1>
-<p>A regression analysis on</p>
+<p>We wound like to address a regression analysis to given out a more precise description of how climate factors affect the velocity besides initial data exploration.</p>
+<p>For bike data:</p>
 <pre class="r"><code>lm_velocity &lt;-
   weather_df %&gt;%
   filter(type == &quot;bike&quot;) %&gt;%
-  mutate(month = as.factor(month)) %&gt;%
-  drop_na()
-lm(velocity ~ trip_distance + awnd + prcp + snwd + tmax + tmin, data = weather_df) %&gt;% summary()</code></pre>
+  mutate(month = as.factor(month)) %&gt;% as.data.frame()
+
+lm(velocity ~ trip_distance + awnd + prcp + snwd + tmax + tmin, data = lm_velocity) %&gt;% summary()</code></pre>
 <pre><code>## 
 ## Call:
 ## lm(formula = velocity ~ trip_distance + awnd + prcp + snwd + 
-##     tmax + tmin, data = weather_df)
+##     tmax + tmin, data = lm_velocity)
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -6.7541 -1.0397 -0.1460  0.8276  9.9388 
+## -3.2692 -0.7067  0.0901  0.7926  3.8033 
 ## 
 ## Coefficients:
 ##                 Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)    3.260e+00  1.628e-01  20.024  &lt; 2e-16 ***
-## trip_distance  3.871e-04  1.496e-05  25.870  &lt; 2e-16 ***
-## awnd           2.100e-03  3.723e-03   0.564  0.57279    
-## prcp           1.235e-03  4.769e-04   2.589  0.00968 ** 
-## snwd           4.553e-04  8.801e-04   0.517  0.60495    
-## tmax           5.386e-04  1.109e-03   0.486  0.62708    
-## tmin          -3.978e-03  1.239e-03  -3.209  0.00135 ** 
+## (Intercept)    2.646e+00  1.676e-01  15.785   &lt;2e-16 ***
+## trip_distance  1.844e-04  1.642e-05  11.233   &lt;2e-16 ***
+## awnd           5.446e-03  3.686e-03   1.477   0.1398    
+## prcp           9.348e-04  5.004e-04   1.868   0.0620 .  
+## snwd          -8.173e-04  1.249e-03  -0.654   0.5130    
+## tmax           5.846e-04  1.125e-03   0.520   0.6035    
+## tmin          -2.337e-03  1.209e-03  -1.933   0.0534 .  
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 1.76 on 2871 degrees of freedom
-##   (86 observations deleted due to missingness)
-## Multiple R-squared:  0.2089, Adjusted R-squared:  0.2073 
-## F-statistic: 126.4 on 6 and 2871 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 1.2 on 1417 degrees of freedom
+##   (60 observations deleted due to missingness)
+## Multiple R-squared:  0.09777,    Adjusted R-squared:  0.09395 
+## F-statistic: 25.59 on 6 and 1417 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>We can discover that the regression coefficient for <code>prcp</code>,<code>tmin</code>,<code>trip_distance</code> is significant under 0.1 significance level.</p>
+<p>The estimates are:</p>
+<ul>
+<li><code>prcp</code>: 9.348e-04</li>
+<li><code>tmin</code>: -2.337e-03</li>
+<li><code>trip_distance</code>: 1.844e-04</li>
+</ul>
+<p>This is consistent with our initial data visualizaiton findings.</p>
+<p>For taxi data:</p>
+<pre class="r"><code>lm_velocity &lt;-
+  weather_df %&gt;%
+  filter(type == &quot;taxi&quot;) %&gt;%
+  mutate(month = as.factor(month)) %&gt;% as.data.frame()
+lm(velocity ~ trip_distance + awnd + prcp + snwd + tmax + tmin, data = lm_velocity) %&gt;% summary()</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = velocity ~ trip_distance + awnd + prcp + snwd + 
+##     tmax + tmin, data = lm_velocity)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.9772 -1.1170 -0.3150  0.7746  8.4551 
+## 
+## Coefficients:
+##                 Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    3.753e+00  2.162e-01  17.360   &lt;2e-16 ***
+## trip_distance  4.114e-04  1.937e-05  21.235   &lt;2e-16 ***
+## awnd           1.084e-03  5.103e-03   0.212    0.832    
+## prcp          -1.055e-04  6.255e-04  -0.169    0.866    
+## snwd           1.690e-04  1.011e-03   0.167    0.867    
+## tmax           1.163e-03  1.493e-03   0.779    0.436    
+## tmin          -1.166e-03  1.739e-03  -0.671    0.503    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.745 on 1447 degrees of freedom
+##   (26 observations deleted due to missingness)
+## Multiple R-squared:  0.2389, Adjusted R-squared:  0.2357 
+## F-statistic: 75.69 on 6 and 1447 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>We can see that only <code>trip_distance</code> is significant, which is consistent with our prior knowledge and the data exploration before.</p>
 </div>
 
 

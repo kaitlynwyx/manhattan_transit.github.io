@@ -3,7 +3,7 @@ title: " "
 output: html_document
 ---
 
-## __Interaction Maps__
+## __Interactive Maps__
 The data visualization above is an overall analysis, in order to analyze the velocity between from one taxi zone to the others through different vehicles and show their geographical locations clearly, we created ___two interactive map applications___ using `R Shiny`.   
   
 #### [**Velocity Heatmap**](http://34.138.2.255:3838/heatmap/)    

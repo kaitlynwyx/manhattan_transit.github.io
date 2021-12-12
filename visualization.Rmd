@@ -5,7 +5,7 @@ output:
     code_folding: hide
 ---
 
-```{r, message = FALSE, warning = FALSE}
+```{r, message = FALSE, warning = FALSE, echo=FALSE}
 library(tidyverse)
 library(ggplot2)
 library(patchwork)
@@ -21,8 +21,8 @@ knitr::opts_chunk$set(
   out.width = "90%"
 )
 ```
-
-```{r, message = FALSE}
+# 
+```{r, message = FALSE, echo=FALSE}
 # read in data for visualization
 taxi_df = read_csv("../P8105-Final-Project/data_vis/taxi_vis.csv")
 bike_df = read_csv("../P8105-Final-Project/data_vis/bike_vis.csv")
@@ -84,7 +84,7 @@ From this barplot we can see that the top 15 most frequent origin-destination pa
 
 To get a general understanding of the travel time and the travel velocity of each type of transportation, we made heatmaps and boxplots to show travel time and velocity during different time periods of the day and across seasons.
 
-### Taxi Travel Time vs. Bike Travel Time
+## __Taxi Travel Time vs. Bike Travel Time__
 ```{r}
 # taxi heatmap for duration
 hp1 =
@@ -233,7 +233,7 @@ weather_transport_df %>%
     theme(plot.title = element_text(hjust = 0.5))
 ```
   
-It's interesting to find out the truth that following by the increasing of wind speed, a linear regression model could be explored between the velocity of bike riders and wind speed and velocity of bikes is increasing as well. While at the same time, wind speed does no influence to taxi drivers.  
+It's interesting to find out the truth that following by the increasing of wind speed, velocity of bikes is increasing as well. While at the same time, wind speed does no influence to taxi drivers.  
 
 ### Rain Precipitation vs Velocity  
 

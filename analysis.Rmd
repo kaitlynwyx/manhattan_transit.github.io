@@ -5,7 +5,7 @@ output: html_document
 
 # __Analysis__
 
-Analysis methods here is simple and straightforward. We find that the velocity fits gaussian distribution well. a simple `t.test()` or `aov()` test will be good. Since we are considering a more detailed location based model. multinomial mixed logistic model which is generally the best model for transportation decision question is not necessary here. We have the following function to make the selection process tidy and we will adopt `data.table` all the time to make the deployment effcient. Here is a sample function for analysis on our website. We can analysis result from any scale simply by cancel some key variables
+Since our study use interactive map to visualize better, analysis methods here is simple and straightforward. We find that the velocity fits gaussian distribution well.A simple `t.test()` or `aov()` test will be good. Since we are considering a more detailed location based model. Multinomial Mixed Logistic model which is generally the best model for transportation decision question is not necessary here. We have the following function to make the selection process tidy and we will adopt `data.table` all the time to make the deployment effcient. Here is a sample function for analysis on our website. We can analysis result from any scale simply by cancel some key variables
 
 ```{r eval=FALSE, echo = TRUE}
 test_function = function(month_in, week_in, data = test_dt,PU,DO, distance_range_low = 0, distance_range_up = 6){
@@ -23,7 +23,9 @@ test_function(month_in = c(1,6,7),week_in = c(1,2,3), PU = "Washington Heights S
 Afterwards we can extract the mean estimate and a p.value based on either t.test or ANOVA.
 
 # __Regression__ 
-A regression analysis on 
+We wound like to address a regression analysis to given out a more precise description of how climate factors affect the velocity besides initial data exploration.
+
+For bike data:
 ```{r include = FALSE}
 library(tidyverse)
 weather_df = read_csv('weather_transport_df.csv')
@@ -32,10 +34,26 @@ weather_df = read_csv('weather_transport_df.csv')
 lm_velocity <-
   weather_df %>%
   filter(type == "bike") %>%
-  mutate(month = as.factor(month)) %>%
-  drop_na()
-lm(velocity ~ trip_distance + awnd + prcp + snwd + tmax + tmin, data = weather_df) %>% summary()
+  mutate(month = as.factor(month)) %>% as.data.frame()
+
+lm(velocity ~ trip_distance + awnd + prcp + snwd + tmax + tmin, data = lm_velocity) %>% summary()
 ```
+We can discover that the regression coefficient for `prcp`,`tmin`,`trip_distance` is significant under 0.1 significance level. 
 
+The estimates are: 
 
-
+* `prcp`: 9.348e-04
+* `tmin`: -2.337e-03
+* `trip_distance`: 1.844e-04
+  
+This is consistent with our initial data visualizaiton findings.
+  
+For taxi data:
+```{r}
+lm_velocity <-
+  weather_df %>%
+  filter(type == "taxi") %>%
+  mutate(month = as.factor(month)) %>% as.data.frame()
+lm(velocity ~ trip_distance + awnd + prcp + snwd + tmax + tmin, data = lm_velocity) %>% summary()
+```
+We can see that only `trip_distance` is significant, which is consistent with our prior knowledge and the data exploration before. 
