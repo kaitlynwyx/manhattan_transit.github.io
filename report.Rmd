@@ -1,5 +1,5 @@
 ---
-title: "Report"
+title: " "
 output: 
   html_document:
     code_folding: hide
@@ -10,6 +10,7 @@ output:
 
 <center>Keming Zhang, Junzhe Shao, Fengjia Chen, Yuchen Zheng, Kaitlyn Wang</center>    
 
+\newline 
 
 ## __Motivation & Related Work__
 According to the INRIX scorecard, NYC is ranked No.1 for the worst traffic in the United States. In such an urban region with a dense population, people who do not wish to use personal vehicles have other transportation options such as bike, subway, bus, or taxi. Although it might seem obvious that riding a bike would not outcompete other transportations in a long travel distance at first glance, we want to examine whether this is true in Manhattan, given that its traffic is on the top list of worst traffic in the country. Inspired by the paper Hail a cab or ride a bike? A travel time comparison of taxi and bicycle-sharing systems in New York City, we are interested in whether bicycles can compete with other transportations in terms of travel time in Manhattan in 2020 to 2021 specifically. Considering the weather, rush hour, subway traffic in Manhattan, we focused on the time in a day, weekday versus weekend and seasonal variation to investigate the best time-saving way to commute all year round. Our final goal is to make an interactive map and dashboards that shows the estimated travel time using different transportations at different time periods of the year by just one click! It is expected to be a marketing tool to help those in need of public transportation in NYC to decide the most time-saving and cost-effective way to travel.  
@@ -116,7 +117,7 @@ for (x in list.files("raw_data/data/green_taxi")){
   print(nrow(res_dt_g))
 }
 ```
-we iteratively read in all target data. Merge the taxi data with the taxi zone data list. and randomly select 10% of samples
+We iteratively read in all target data. Merge the taxi data with the taxi zone data list. and randomly select 10% of samples
 Some key variables discription:  
 
 * `PU/DOLocationID`: ID of pickup/drop off location  
@@ -160,7 +161,8 @@ test_mta_final = test_mta_dt[,colnames(test_dt), with = F]
 The key idea here is we consider all the transit without transfers between lines which the schedule can not simulate. We create 5 times random pairs grouped by `train_id`,`day`,`line` to make sure they are exactly the same train, same line, and same day. 5 fold is enough here because the variance of velocity for the same route is actually small compared to bike and taxi from our prior knowledge. 
 
 ### Intergration
-New variables were added for visualization purposes in the `taxi_sample.csv`, `bike_sample.csv` and `subway_sample.csv` files. Below are the variables added:
+
+To avoid extreme values affecting the results, we filter observations whose velocity and duration were greater than 99 percentile. Since final combined dataset is too big for us to efficiently make plots for visualizations, we again drew a sample of the data to make our plots which generates the following three sample datasets: `taxi_sample.csv`, `bike_sample.csv` and `subway_sample.csv`. New variables were added for visualization purposes which are listed below:
 
 - `Season`: winter(Dec-Feb), spring(Mar-May), summer(Jun-Aug), fall(Sep-Nov)
 - `Duration`: the difference between pick up time and drop off time for citibike and subway: the time difference of a trip between a location pair for subway
@@ -171,31 +173,15 @@ New variables were added for visualization purposes in the `taxi_sample.csv`, `b
 
 ## __Visualization__
 
-### Most Frequent Origin - Destination Pairs
+### Taxi, Bike, Subway Visualization
 
-Looking at the most frequent origin-destination pairs in our dataset, we can see which areas in Manhattan people prefer getting around by taxi and which area in Manhattan people prefer getting around by bike.   
+We made two barplots for the top 10 most frequent origin-destination pairs for taxi and bike so that we can see which areas in Manhattan people prefer getting around by taxi and which areas in Manhattan people prefer getting around by bike. We learned that the top 15 most frequent origin-destination pairs for taxi are located in the upper east side and in the upper west side and the top 15 most frequent origin-destination pairs for bike are located in East Village, East Chelsea and Central Park.    
 
-### Taxi
+In addition, we made two heatmaps to compare the travel time between taxi and bike. The heat maps show the travel time for bike is overall greater than the travel time for taxi for all day and all seasons and the travel times are the greatest during rush hour from 4pm to 7pm for both taxi and bike. Across four seasons, the travel time is the greatest in winter for taxi and the travel time is the greatest in spring for bike. We also made two heatmaps to compare the velocity between taxi and bike. The velocity for bike is overall smaller than the velocity for taxi all day and all seasons. Taxi travels the slowest during rush hour from 4pm to 7pm all seasons except fall and taxi travels the slowest in winter. Similar to taxi, bike travel the slowest during rush hour from 4pm to 7pm in all seasons except fall.   
 
-From this barplot we can see that the top 15 most frequent origin-destination pairs are located in the upper east side and in the upper west side. 
+Moreover, a duration boxplot was made to compare the travel time on weekdays and weekends for each type of transportation, bike, taxi and subway. The boxplot shows the travel time is greater on weekends for bike. The travel time seems to be similar for the subway on both weekdays and weekends. The travel time for taxi is longer on weekdays. A velocity boxplot was also made to compare the travel velocity on weekdays and weekends for each type of transportation. The velocity boxplot shows the velocities for the subway on both weekdays and weekends are the greatest and they are similar across the week. Taxi travels faster on the weekend and bike travels faster on weekdays.  
 
-### Bike  
-
-From this barplot we can see that the top 15 most frequent origin-destination pairs for bike are located in East Village, East Chelsea and Central Park. 
-
-To get a general understanding of the travel time and the travel velocity of each type of transportation, we made heatmaps and boxplots to show travel time and velocity during different time periods of the day and across seasons.
-
-### Taxi Travel Time vs. Bike Travel Time  
-
-These two heatmaps compare the travel time between taxi and bike. We can see that the travel time for bike are overall greater than the travel time for taxi for all day and all seasons. The travel times are the greatest during rush hour from 4pm to 7pm for both taxi and bike. Across four seasons, the travel time is the greatest in winter for taxi and the travel time is the greatest in spring for bike.  
-
-These two heatmaps compare the velocity between taxi and bike. We can see that the velocity for bike is overall smaller than the velocity for taxi all day and all seasons. Taxi travels the slowest during rush hour from 4pm to 7pm all seasons except fall and taxi travels the slowest in winter. Similar to taxi, bike travels the slowest during rush hour from 4pm to 7pm all seasons except fall. 
-
-This duration boxplot compares the travel time on weekdays and weekends for each type of transportation. From this plot we can see that the travel time is greater on weekend for bike. The travel time seems to be similar for subway on both weekdays and weekend. The travel time for taxi is longer on weekdays.
-
-This velocity boxplot compares the travel velocity on weekdays and weekends for each type of transportation. From this plot we can see that the velocities for subway on both weekdays and weekend are the greatest and they are similar across the week. Taxi travels faster on the weekend and bike travels faster on weekdays.    
-
-## Weather Influence
+### Weather Influence
 
 ## __Exploratory Analysis__
 

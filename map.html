@@ -11,7 +11,7 @@
 
 
 
-<title>map</title>
+<title>map.knit</title>
 
 <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -339,7 +339,7 @@ div.tocify {
   <a href="analysis.html">Analysis</a>
 </li>
 <li>
-  <a href="Shiny_app.html">Shiny App</a>
+  <a href="Shiny_app.html">Shiny</a>
 </li>
 <li>
   <a href="result.html">Findings&amp;Conclusion</a>
@@ -376,25 +376,29 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">map</h1>
 
 </div>
 
 
-<div id="r-markdown" class="section level2">
-<h2>R Markdown</h2>
-<p>interactive map:</p>
-<pre class="r"><code>summary(cars)</code></pre>
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00</code></pre>
+<div id="interaction-maps" class="section level2">
+<h2>Interaction Maps</h2>
+<p>The data visualization above is an overall analysis, in order to analyze the velocity between from one taxi zone to the others through different vehicles and show their geographical locations clearly, we created <strong><em>two interactive map applications</em></strong> using <code>R Shiny</code>.</p>
+<div id="velocity-heatmap" class="section level4">
+<h4><a href="http://34.138.2.255:3838/heatmap/"><strong>Velocity Heatmap</strong></a></h4>
+<p>Velocity heatmap is aimed to provide a tool to better analyze the velocity differences among different taxi zones during different times of the day in different months. To create this velocity heatmap, we first integrated the leaflet package to incorporate a worldwide map, drew polygons on Manhattan and divided the areas based on the taxi zone map. Adding click actions on the map is also necessary for there are 69 taxi zones, making it hard to select taxi zones through traditional methods, like select boxes.</p>
+<p>Users are able to navigate through this velocity heatmap by selecting desired zone, vehicle type, month, day and time to compare the speed. By clicking the relative taxi zone as our departure, it helps to explore and calculate the mean speed rate to different taxi zones, and create interactive plots that respond to each mouse event, combined with R’s graphics functions.</p>
+<center>
+<p><img src="picture/velocity_map.png" width="700" /></p>
+<center/>
 </div>
-<div id="including-plots" class="section level2">
-<h2>Including Plots</h2>
+<div id="choose-best-vehicle" class="section level4">
+<h4><a href="http://34.138.2.255:3838/bestvehicle/"><strong>Choose Best Vehicle</strong></a></h4>
+<p>Besides comparing the speed from a fixed taxi zone to others, we also create an interactive map application to compare the speed from one taxi zone to another through taxi, bike and subway to see which one is the best during different times of the day in different months.</p>
+<p>While using this app, the users would be able to choose whatever the departure taxi zone and destination taxi zone are within Manhattan using graphic straightforward clicking. With the synchronous web search for either pick up or drop off location.</p>
+<center>
+<p><img src="picture/choose_best_vehicle.png" width="700" /></p>
+<center/>
+</div>
 </div>
 
 

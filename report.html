@@ -11,15 +11,10 @@
 
 
 
-<title>Report</title>
+<title>report.knit</title>
 
-<<<<<<< HEAD
-<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
-=======
 <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
->>>>>>> de24d26e17fd2ec7f06a99e4812366acf88a2035
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -344,7 +339,7 @@ div.tocify {
   <a href="analysis.html">Analysis</a>
 </li>
 <li>
-  <a href="Shiny_app.html">Shiny App</a>
+  <a href="Shiny_app.html">Shiny</a>
 </li>
 <li>
   <a href="result.html">Findings&amp;Conclusion</a>
@@ -381,7 +376,6 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Report</h1>
 
 </div>
 
@@ -397,19 +391,11 @@ Fastest Way to Get Around in Manhattan
 Keming Zhang, Junzhe Shao, Fengjia Chen, Yuchen Zheng, Kaitlyn Wang
 </center>
 <div id="motivation-related-work" class="section level2">
-<<<<<<< HEAD
 <h2><strong>Motivation &amp; Related Work</strong></h2>
 <p>According to the INRIX scorecard, NYC is ranked No.1 for the worst traffic in the United States. In such an urban region with a dense population, people who do not wish to use personal vehicles have other transportation options such as bike, subway, bus, or taxi. Although it might seem obvious that riding a bike would not outcompete other transportations in a long travel distance at first glance, we want to examine whether this is true in Manhattan, given that its traffic is on the top list of worst traffic in the country. Inspired by the paper Hail a cab or ride a bike? A travel time comparison of taxi and bicycle-sharing systems in New York City, we are interested in whether bicycles can compete with other transportations in terms of travel time in Manhattan in 2020 to 2021 specifically. Considering the weather, rush hour, subway traffic in Manhattan, we focused on the time in a day, weekday versus weekend and seasonal variation to investigate the best time-saving way to commute all year round. Our final goal is to make an interactive map and dashboards that shows the estimated travel time using different transportations at different time periods of the year by just one click! It is expected to be a marketing tool to help those in need of public transportation in NYC to decide the most time-saving and cost-effective way to travel.</p>
 </div>
 <div id="questions" class="section level2">
 <h2><strong>Questions</strong></h2>
-=======
-<h2>Motivation &amp; Related Work</h2>
-<p>According to the INRIX scorecard, NYC is ranked No.1 for the worst traffic in the United States. In such an urban region with a dense population, people who do not wish to use personal vehicles have other transportation options such as bike, subway, bus, or taxi. Although it might seem obvious that riding a bike would not outcompete other transportations in a long travel distance at first glance, we want to examine whether this is true in Manhattan, given that its traffic is on the top list of worst traffic in the country. Inspired by the paper Hail a cab or ride a bike? A travel time comparison of taxi and bicycle-sharing systems in New York City, we are interested in whether bicycles can compete with other transportations in terms of travel time in Manhattan in 2020 to 2021 specifically. Considering the weather, rush hour, subway traffic in Manhattan, we focused on the time in a day, weekday versus weekend and seasonal variation to investigate the best time-saving way to commute all year round. Our final goal is to make an interactive map and dashboards that shows the estimated travel time using different transportations at different time periods of the year by just one click! It is expected to be a marketing tool to help those in need of public transportation in NYC to decide the most time-saving and cost-effective way to travel.</p>
-</div>
-<div id="questions" class="section level2">
-<h2>Questions</h2>
->>>>>>> de24d26e17fd2ec7f06a99e4812366acf88a2035
 <p>The initial question that we were trying to answer was whether riding bike is faster than taking other transportions in Manhattan all year round and to identify possible factors that might contribute to traffic time difference. To examine this question, we did not just look at the travel time of each trip with each transportation, instead, we took into consideration the seasonal variation, rush hours, weekday versus weekend and weather. While we look into the dataset and explore the relation between all numbers, we hope to learn more about the characteristics through answering the following questions:</p>
 <ul>
 <li>What might be the fastest transportation to choose within Manhattan?<br />
@@ -426,11 +412,7 @@ Keming Zhang, Junzhe Shao, Fengjia Chen, Yuchen Zheng, Kaitlyn Wang
 <p>While we were manipulating and having deeper exploration, more useful insights, questions and conclusions came up. During this process, we organized and optimized the raw data, and transformed them into more readable explanations after appropriate processing. Meanwhile, we tried to discover and explain more based on existing data, find out the possible factors that might influence the speed, and combine them with the statistics analysis and map searching.</p>
 </div>
 <div id="data-source" class="section level2">
-<<<<<<< HEAD
 <h2><strong>Data Source</strong></h2>
-=======
-<h2>Data Source</h2>
->>>>>>> de24d26e17fd2ec7f06a99e4812366acf88a2035
 <ul>
 <li><p><a href="https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page">NYC Taxi Trip Record Data</a> : We obtained the yellow taxi, green taxi and taxi zone lookup table from this website. The original yellow and green taxi datasets contain files from Jan. 2020 to Jul. 2021 with 33,671,276 and 749,439 observations, respectively.</p></li>
 <li><p><a href="https://ride.citibikenyc.com/system-data">Dataset on Citi Bike Trip Histories</a> : Citibike dataset was obtained from the citibike website, with files from Jan. 2020 to Oct. 2021 including information on pick up locations and times, drop off locations and time, etc in Manhattan, Brooklyn, Queens and Bronx specificaly.</p></li>
@@ -512,7 +494,7 @@ for (x in list.files(&quot;raw_data/data/green_taxi&quot;)){
   print(nrow(temp_dt))
   print(nrow(res_dt_g))
 }</code></pre>
-<p>we iteratively read in all target data. Merge the taxi data with the taxi zone data list. and randomly select 10% of samples Some key variables discription:</p>
+<p>We iteratively read in all target data. Merge the taxi data with the taxi zone data list. and randomly select 10% of samples Some key variables discription:</p>
 <ul>
 <li><code>PU/DOLocationID</code>: ID of pickup/drop off location<br />
 </li>
@@ -552,7 +534,7 @@ test_mta_final = test_mta_dt[,colnames(test_dt), with = F]</code></pre>
 </div>
 <div id="intergration" class="section level3">
 <h3>Intergration</h3>
-<p>New variables were added for visualization purposes in the <code>taxi_sample.csv</code>, <code>bike_sample.csv</code> and <code>subway_sample.csv</code> files. Below are the variables added:</p>
+<p>To avoid extreme values affecting the results, we filter observations whose velocity and duration were greater than 99 percentile. Since final combined dataset is too big for us to efficiently make plots for visualizations, we again drew a sample of the data to make our plots which generates the following three sample datasets: <code>taxi_sample.csv</code>, <code>bike_sample.csv</code> and <code>subway_sample.csv</code>. New variables were added for visualization purposes which are listed below:</p>
 <ul>
 <li><code>Season</code>: winter(Dec-Feb), spring(Mar-May), summer(Jun-Aug), fall(Sep-Nov)</li>
 <li><code>Duration</code>: the difference between pick up time and drop off time for citibike and subway: the time difference of a trip between a location pair for subway</li>
@@ -563,41 +545,19 @@ test_mta_final = test_mta_dt[,colnames(test_dt), with = F]</code></pre>
 </div>
 </div>
 <div id="visualization" class="section level2">
-<<<<<<< HEAD
 <h2><strong>Visualization</strong></h2>
-=======
-<h2>Visualization</h2>
->>>>>>> de24d26e17fd2ec7f06a99e4812366acf88a2035
-<div id="most-frequent-origin---destination-pairs" class="section level3">
-<h3>Most Frequent Origin - Destination Pairs</h3>
-<p>Looking at the most frequent origin-destination pairs in our dataset, we can see which areas in Manhattan people prefer getting around by taxi and which area in Manhattan people prefer getting around by bike.</p>
+<div id="taxi-bike-subway-visualization" class="section level3">
+<h3>Taxi, Bike, Subway Visualization</h3>
+<p>We made two barplots for the top 10 most frequent origin-destination pairs for taxi and bike so that we can see which areas in Manhattan people prefer getting around by taxi and which areas in Manhattan people prefer getting around by bike. We learned that the top 15 most frequent origin-destination pairs for taxi are located in the upper east side and in the upper west side and the top 15 most frequent origin-destination pairs for bike are located in East Village, East Chelsea and Central Park.</p>
+<p>In addition, we made two heatmaps to compare the travel time between taxi and bike. The heat maps show the travel time for bike is overall greater than the travel time for taxi for all day and all seasons and the travel times are the greatest during rush hour from 4pm to 7pm for both taxi and bike. Across four seasons, the travel time is the greatest in winter for taxi and the travel time is the greatest in spring for bike. We also made two heatmaps to compare the velocity between taxi and bike. The velocity for bike is overall smaller than the velocity for taxi all day and all seasons. Taxi travels the slowest during rush hour from 4pm to 7pm all seasons except fall and taxi travels the slowest in winter. Similar to taxi, bike travel the slowest during rush hour from 4pm to 7pm in all seasons except fall.</p>
+<p>Moreover, a duration boxplot was made to compare the travel time on weekdays and weekends for each type of transportation, bike, taxi and subway. The boxplot shows the travel time is greater on weekends for bike. The travel time seems to be similar for the subway on both weekdays and weekends. The travel time for taxi is longer on weekdays. A velocity boxplot was also made to compare the travel velocity on weekdays and weekends for each type of transportation. The velocity boxplot shows the velocities for the subway on both weekdays and weekends are the greatest and they are similar across the week. Taxi travels faster on the weekend and bike travels faster on weekdays.</p>
 </div>
-<div id="taxi" class="section level3">
-<h3>Taxi</h3>
-<p>From this barplot we can see that the top 15 most frequent origin-destination pairs are located in the upper east side and in the upper west side.</p>
+<div id="weather-influence" class="section level3">
+<h3>Weather Influence</h3>
 </div>
-<div id="bike" class="section level3">
-<h3>Bike</h3>
-<p>From this barplot we can see that the top 15 most frequent origin-destination pairs for bike are located in East Village, East Chelsea and Central Park.</p>
-<p>To get a general understanding of the travel time and the travel velocity of each type of transportation, we made heatmaps and boxplots to show travel time and velocity during different time periods of the day and across seasons.</p>
-</div>
-<div id="taxi-travel-time-vs.-bike-travel-time" class="section level3">
-<h3>Taxi Travel Time vs. Bike Travel Time</h3>
-<p>These two heatmaps compare the travel time between taxi and bike. We can see that the travel time for bike are overall greater than the travel time for taxi for all day and all seasons. The travel times are the greatest during rush hour from 4pm to 7pm for both taxi and bike. Across four seasons, the travel time is the greatest in winter for taxi and the travel time is the greatest in spring for bike.</p>
-<p>These two heatmaps compare the velocity between taxi and bike. We can see that the velocity for bike is overall smaller than the velocity for taxi all day and all seasons. Taxi travels the slowest during rush hour from 4pm to 7pm all seasons except fall and taxi travels the slowest in winter. Similar to taxi, bike travels the slowest during rush hour from 4pm to 7pm all seasons except fall.</p>
-<p>This duration boxplot compares the travel time on weekdays and weekends for each type of transportation. From this plot we can see that the travel time is greater on weekend for bike. The travel time seems to be similar for subway on both weekdays and weekend. The travel time for taxi is longer on weekdays.</p>
-<p>This velocity boxplot compares the travel velocity on weekdays and weekends for each type of transportation. From this plot we can see that the velocities for subway on both weekdays and weekend are the greatest and they are similar across the week. Taxi travels faster on the weekend and bike travels faster on weekdays.</p>
-</div>
-</div>
-<div id="weather-influence" class="section level2">
-<h2>Weather Influence</h2>
 </div>
 <div id="exploratory-analysis" class="section level2">
-<<<<<<< HEAD
 <h2><strong>Exploratory Analysis</strong></h2>
-=======
-<h2>Exploratory Analysis</h2>
->>>>>>> de24d26e17fd2ec7f06a99e4812366acf88a2035
 <div id="analysis" class="section level3">
 <h3>Analysis</h3>
 <p>Analysis methods here is simple and straightforward. We find that the velocity fits gaussian distribution well. a simple <code>t.test()</code> or <code>aov()</code> test will be good. Since we are considering a more detailed location based model. multinomial mixed logistic model which is generally the best model for transportation decision question is not necessary here. We have the following function to make the selection process tidy and we will adopt <code>data.table</code> all the time to make the deployment effcient. Here is a sample function for analysis on our website. We can analysis result from any scale simply by cancel some key variables</p>
@@ -650,11 +610,7 @@ lm(velocity ~ trip_distance + awnd + prcp + snwd + tmax + tmin, data = weather_d
 </div>
 </div>
 <div id="interaction-map" class="section level2">
-<<<<<<< HEAD
 <h2><strong>Interaction Map</strong></h2>
-=======
-<h2>Interaction Map</h2>
->>>>>>> de24d26e17fd2ec7f06a99e4812366acf88a2035
 </div>
 
 
