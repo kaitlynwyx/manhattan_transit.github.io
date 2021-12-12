@@ -21,6 +21,8 @@ navbar:
       href: mailto:<abc@xyz.com>
     - icon: fa-github fa-lg
       href: https://github.com/Junzheshao5959/P8105-Final-Project
+    - icon: fa-youtube fa-lg
+      href: https://www.youtube.com/
 output:
   html_document:
     theme: cosmo
