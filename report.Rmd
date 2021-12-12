@@ -8,12 +8,13 @@ output:
 <h1><b><center>Fastest Way to Get Around in Manhattan</center></b></h1>
 
 
-<center>Keming Zhang, Junzhe Shao, Fengjia Chen, Yuchen Zheng, Kaitlyn Wang</center>  
+<center>Keming Zhang, Junzhe Shao, Fengjia Chen, Yuchen Zheng, Kaitlyn Wang</center>    
 
-## Motivation & Related Work
+
+## __Motivation & Related Work__
 According to the INRIX scorecard, NYC is ranked No.1 for the worst traffic in the United States. In such an urban region with a dense population, people who do not wish to use personal vehicles have other transportation options such as bike, subway, bus, or taxi. Although it might seem obvious that riding a bike would not outcompete other transportations in a long travel distance at first glance, we want to examine whether this is true in Manhattan, given that its traffic is on the top list of worst traffic in the country. Inspired by the paper Hail a cab or ride a bike? A travel time comparison of taxi and bicycle-sharing systems in New York City, we are interested in whether bicycles can compete with other transportations in terms of travel time in Manhattan in 2020 to 2021 specifically. Considering the weather, rush hour, subway traffic in Manhattan, we focused on the time in a day, weekday versus weekend and seasonal variation to investigate the best time-saving way to commute all year round. Our final goal is to make an interactive map and dashboards that shows the estimated travel time using different transportations at different time periods of the year by just one click! It is expected to be a marketing tool to help those in need of public transportation in NYC to decide the most time-saving and cost-effective way to travel.  
 
-## Questions  
+## __Questions__  
 
 The initial question that we were trying to answer was whether riding bike is faster than taking other transportions in Manhattan all year round and to identify possible factors that might contribute to traffic time difference. To examine this question, we did not just look at the travel time of each trip with each transportation, instead, we took into consideration the seasonal variation, rush hours, weekday versus weekend and weather. While we look into the dataset and explore the relation between all numbers, we hope to learn more about the characteristics through answering the following questions:  
   
@@ -26,7 +27,7 @@ The initial question that we were trying to answer was whether riding bike is fa
  
 While we were manipulating and having deeper exploration, more useful insights, questions and conclusions came up. During this process, we organized and optimized the raw data, and transformed them into more readable explanations after appropriate processing. Meanwhile, we tried to discover and explain more based on existing data, find out the possible factors that might influence the speed, and combine them with the statistics analysis and map searching. 
 
-## Data Source 
+## __Data Source__ 
 
 * [NYC Taxi Trip Record Data](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page) : We obtained the yellow taxi, green taxi and taxi zone lookup table from this website. The original yellow and green taxi datasets contain files from Jan. 2020 to Jul. 2021 with 33,671,276 and 749,439 observations, respectively.  
 
@@ -168,7 +169,7 @@ New variables were added for visualization purposes in the `taxi_sample.csv`, `b
 - `Day Type`: weekday, weekend 
 
 
-## Visualization
+## __Visualization__
 
 ### Most Frequent Origin - Destination Pairs
 
@@ -196,7 +197,7 @@ This velocity boxplot compares the travel velocity on weekdays and weekends for 
 
 ## Weather Influence
 
-## Exploratory Analysis
+## __Exploratory Analysis__
 
 ### Analysis
 
@@ -232,4 +233,4 @@ lm_velocity <-
 lm(velocity ~ trip_distance + awnd + prcp + snwd + tmax + tmin, data = weather_df) %>% summary()
 ```
 
-## Interaction Map
+## __Interaction Map__
