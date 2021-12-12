@@ -11,7 +11,7 @@
 
 
 
-<title>Report</title>
+<title>report.knit</title>
 
 <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -376,7 +376,6 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Report</h1>
 
 </div>
 
@@ -495,7 +494,7 @@ for (x in list.files(&quot;raw_data/data/green_taxi&quot;)){
   print(nrow(temp_dt))
   print(nrow(res_dt_g))
 }</code></pre>
-<p>we iteratively read in all target data. Merge the taxi data with the taxi zone data list. and randomly select 10% of samples Some key variables discription:</p>
+<p>We iteratively read in all target data. Merge the taxi data with the taxi zone data list. and randomly select 10% of samples Some key variables discription:</p>
 <ul>
 <li><code>PU/DOLocationID</code>: ID of pickup/drop off location<br />
 </li>
@@ -535,7 +534,7 @@ test_mta_final = test_mta_dt[,colnames(test_dt), with = F]</code></pre>
 </div>
 <div id="intergration" class="section level3">
 <h3>Intergration</h3>
-<p>New variables were added for visualization purposes in the <code>taxi_sample.csv</code>, <code>bike_sample.csv</code> and <code>subway_sample.csv</code> files. Below are the variables added:</p>
+<p>To avoid extreme values affecting the results, we filter observations whose velocity and duration were greater than 99 percentile. Since final combined dataset is too big for us to efficiently make plots for visualizations, we again drew a sample of the data to make our plots which generates the following three sample datasets: <code>taxi_sample.csv</code>, <code>bike_sample.csv</code> and <code>subway_sample.csv</code>. New variables were added for visualization purposes which are listed below:</p>
 <ul>
 <li><code>Season</code>: winter(Dec-Feb), spring(Mar-May), summer(Jun-Aug), fall(Sep-Nov)</li>
 <li><code>Duration</code>: the difference between pick up time and drop off time for citibike and subway: the time difference of a trip between a location pair for subway</li>
@@ -553,9 +552,9 @@ test_mta_final = test_mta_dt[,colnames(test_dt), with = F]</code></pre>
 <p>In addition, we made two heatmaps to compare the travel time between taxi and bike. The heat maps show the travel time for bike is overall greater than the travel time for taxi for all day and all seasons and the travel times are the greatest during rush hour from 4pm to 7pm for both taxi and bike. Across four seasons, the travel time is the greatest in winter for taxi and the travel time is the greatest in spring for bike. We also made two heatmaps to compare the velocity between taxi and bike. The velocity for bike is overall smaller than the velocity for taxi all day and all seasons. Taxi travels the slowest during rush hour from 4pm to 7pm all seasons except fall and taxi travels the slowest in winter. Similar to taxi, bike travel the slowest during rush hour from 4pm to 7pm in all seasons except fall.</p>
 <p>Moreover, a duration boxplot was made to compare the travel time on weekdays and weekends for each type of transportation, bike, taxi and subway. The boxplot shows the travel time is greater on weekends for bike. The travel time seems to be similar for the subway on both weekdays and weekends. The travel time for taxi is longer on weekdays. A velocity boxplot was also made to compare the travel velocity on weekdays and weekends for each type of transportation. The velocity boxplot shows the velocities for the subway on both weekdays and weekends are the greatest and they are similar across the week. Taxi travels faster on the weekend and bike travels faster on weekdays.</p>
 </div>
+<div id="weather-influence" class="section level3">
+<h3>Weather Influence</h3>
 </div>
-<div id="weather-influence" class="section level2">
-<h2>Weather Influence</h2>
 </div>
 <div id="exploratory-analysis" class="section level2">
 <h2><strong>Exploratory Analysis</strong></h2>
