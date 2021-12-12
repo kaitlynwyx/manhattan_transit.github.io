@@ -339,9 +339,6 @@ div.tocify {
   <a href="analysis.html">Analysis</a>
 </li>
 <li>
-  <a href="Shiny_app.html">Shiny</a>
-</li>
-<li>
   <a href="result.html">Conclusions</a>
 </li>
 <li>
@@ -387,7 +384,7 @@ div.tocify {
 
 
 <div id="analysis" class="section level1">
-<h1>Analysis</h1>
+<h1><strong>Analysis</strong></h1>
 <p>Analysis methods here is simple and straightforward. We find that the velocity fits gaussian distribution well. a simple <code>t.test()</code> or <code>aov()</code> test will be good. Since we are considering a more detailed location based model. multinomial mixed logistic model which is generally the best model for transportation decision question is not necessary here. We have the following function to make the selection process tidy and we will adopt <code>data.table</code> all the time to make the deployment effcient. Here is a sample function for analysis on our website. We can analysis result from any scale simply by cancel some key variables</p>
 <pre class="r"><code>test_function = function(month_in, week_in, data = test_dt,PU,DO, distance_range_low = 0, distance_range_up = 6){
   x = data[month %in% month_in][week %in% week_in][type == &#39;taxi&#39;][trip_distance &gt;= 1000*distance_range_low][trip_distance &lt;= 1000*distance_range_up][PUZone == PU][DOZone == DO][,.(velocity)]
@@ -402,7 +399,7 @@ test_function(month_in = c(1,6,7),week_in = c(1,2,3), PU = &quot;Washington Heig
 <p>Afterwards we can extract the mean estimate and a p.value based on either t.test or ANOVA.</p>
 </div>
 <div id="regression" class="section level1">
-<h1>Regression</h1>
+<h1><strong>Regression</strong></h1>
 <p>A regression analysis on</p>
 <pre class="r"><code>lm_velocity &lt;-
   weather_df %&gt;%

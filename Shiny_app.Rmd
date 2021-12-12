@@ -3,23 +3,7 @@ title: "Shiny app"
 output: html_document
 ---
   
-## Problems We Met
 
-Some challenges arose during development using `R Shiny` and the `leaflet` package. We needed to divide the Manhattan region to different taxi zones on the map and identified each click response with the corresponding area range. During which we came up and identified several problems and solved those difficulties as described below:
-
-- ___Reducing dataset and identifying the information of taxi zones specifically within Manhattan.___   
-There was a large dataset we downloaded from the website which included all data within the NYC location. We targeted to reduce the size of the data and concentrated only on the Manhattan area. Among all the information, we first identified all taxi zone names in NYC and filtered them only within Manhattan that we focused on and recorded them with the new numbers from 1 to 69.   
-
-- ___Draw map and draw zone polygons according to taxi zone division.___     
-Unlike worldwide maps that could be directly imported using `leaflet()`, the taxi zone division on Manhattan should be further processed. We downloaded a [Manhattan data](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page) from the web and got their location data after data cleaning. `addPolygons()` function required us to define the columns of latitude and longitude, which could be derived from our data, linking adjacent points using lines and creating shapes of interest.  
-
-- ___What if the pick up location and drop off location are in the same taxi zone?___    
-Regarding our original code, the same location could not be clicked twice which means if we double click the same taxi zone and set it as both our origin and destination, the function would return `point_bool` parameter from `TRUE` to `FALSE` and led to visualization error. To solve this problem, we used the `if` function to specify this special situation.  
-
-- ___Merging problems while cooperating with branches.___  
-We had several branches while we were dealing with our codes, and all codes would be pushed to our personal branch first before finally merging into the main branch. As we had two people mainly dealing with the `Shiny` application that needed cooperation work, it required a lot of merging process and there were several times when code overlapped or merging problems on local paths arose. Solving this problem required constant updates between members.
-<!-- - Click function?(km)   -->
-<!-- - Host interactive R shiny application on Github over the web. (km)   -->
  
 ## Analysis and Summaries  
 

@@ -339,9 +339,6 @@ div.tocify {
   <a href="analysis.html">Analysis</a>
 </li>
 <li>
-  <a href="Shiny_app.html">Shiny</a>
-</li>
-<li>
   <a href="result.html">Conclusions</a>
 </li>
 <li>
@@ -387,20 +384,6 @@ div.tocify {
 </div>
 
 
-<div id="problems-we-met" class="section level2">
-<h2>Problems We Met</h2>
-<p>Some challenges arose during development using <code>R Shiny</code> and the <code>leaflet</code> package. We needed to divide the Manhattan region to different taxi zones on the map and identified each click response with the corresponding area range. During which we came up and identified several problems and solved those difficulties as described below:</p>
-<ul>
-<li><p><strong><em>Reducing dataset and identifying the information of taxi zones specifically within Manhattan.</em></strong><br />
-There was a large dataset we downloaded from the website which included all data within the NYC location. We targeted to reduce the size of the data and concentrated only on the Manhattan area. Among all the information, we first identified all taxi zone names in NYC and filtered them only within Manhattan that we focused on and recorded them with the new numbers from 1 to 69.</p></li>
-<li><p><strong><em>Draw map and draw zone polygons according to taxi zone division.</em></strong><br />
-Unlike worldwide maps that could be directly imported using <code>leaflet()</code>, the taxi zone division on Manhattan should be further processed. We downloaded a <a href="https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page">Manhattan data</a> from the web and got their location data after data cleaning. <code>addPolygons()</code> function required us to define the columns of latitude and longitude, which could be derived from our data, linking adjacent points using lines and creating shapes of interest.</p></li>
-<li><p><strong><em>What if the pick up location and drop off location are in the same taxi zone?</em></strong><br />
-Regarding our original code, the same location could not be clicked twice which means if we double click the same taxi zone and set it as both our origin and destination, the function would return <code>point_bool</code> parameter from <code>TRUE</code> to <code>FALSE</code> and led to visualization error. To solve this problem, we used the <code>if</code> function to specify this special situation.</p></li>
-<li><p><strong><em>Merging problems while cooperating with branches.</em></strong><br />
-We had several branches while we were dealing with our codes, and all codes would be pushed to our personal branch first before finally merging into the main branch. As we had two people mainly dealing with the <code>Shiny</code> application that needed cooperation work, it required a lot of merging process and there were several times when code overlapped or merging problems on local paths arose. Solving this problem required constant updates between members. <!-- - Click function?(km)   --> <!-- - Host interactive R shiny application on Github over the web. (km)   --></p></li>
-</ul>
-</div>
 <div id="analysis-and-summaries" class="section level2">
 <h2>Analysis and Summaries</h2>
 <p>Some major findings are worth pointing out from the velocity heatmap.</p>
