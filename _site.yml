@@ -3,15 +3,15 @@ output_dir: "."
 navbar:
   title: "Overview"
   right:
-    - text: 'Exploration&Visualization'
-      href: visualization.html
-    - text: "Interactive Map"
-      href: map.html
     - text: 'Data source&Cleaning'
       href: data.html
+    - text: 'Exploration&Visualization'
+      href: visualization.html
     - text: 'Analysis'
       href: analysis.html
-    - text: 'Shiny App'
+    - text: "Interactive Map"
+      href: map.html
+    - text: 'Shiny'
       href: Shiny_app.html
     - text: 'Findings&Conclusion'
       href: result.html

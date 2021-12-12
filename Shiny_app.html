@@ -381,29 +381,8 @@ div.tocify {
 </div>
 
 
-<div id="interaction-maps" class="section level2">
-<h2>Interaction Maps</h2>
-<p>The data visualization above is an overall analysis, in order to analyze the velocity between from one taxi zone to the others through different vehicles and show their geographical locations clearly, we created <strong><em>two interactive map applications</em></strong> using <code>R Shiny</code>.</p>
-<div id="velocity-heatmap" class="section level4">
-<h4><a href="http://34.138.2.255:3838/heatmap/"><strong>Velocity Heatmap</strong></a></h4>
-<p>Velocity heatmap is aimed to provide a tool to better analyze the velocity differences among different taxi zones during different times of the day in different months. To create this velocity heatmap, we first integrated the leaflet package to incorporate a worldwide map, drew polygons on Manhattan and divided the areas based on the taxi zone map. Adding click actions on the map is also necessary for there are 69 taxi zones, making it hard to select taxi zones through traditional methods, like select boxes.</p>
-<p>Users are able to navigate through this velocity heatmap by selecting desired zone, vehicle type, month, day and time to compare the speed. By clicking the relative taxi zone as our departure, it helps to explore and calculate the mean speed rate to different taxi zones, and create interactive plots that respond to each mouse event, combined with R’s graphics functions.</p>
-<center>
-<p><img src="picture/velocity_map.png" width="700" /></p>
-<center/>
-</div>
-<div id="choose-best-vehicle" class="section level4">
-<h4><a href="http://34.138.2.255:3838/bestvehicle/"><strong>Choose Best Vehicle</strong></a></h4>
-<p>Besides comparing the speed from a fixed taxi zone to others, we also create an interactive map application to compare the speed from one taxi zone to another through taxi, bike and subway to see which one is the best during different times of the day in different months.</p>
-<p>While using this app, the users would be able to choose whatever the departure taxi zone and destination taxi zone are within Manhattan using graphic straightforward clicking. With the synchronous web search for either pick up or drop off location.</p>
-<center>
-<img src="picture/choose_best_vehicle.png" width="700" />
-<center/>
-<center/>
-<hr />
-</div>
-<div id="problems-we-met" class="section level4">
-<h4>Problems We Met</h4>
+<div id="problems-we-met" class="section level2">
+<h2>Problems We Met</h2>
 <p>Some challenges arose during development using <code>R Shiny</code> and the <code>leaflet</code> package. We needed to divide the Manhattan region to different taxi zones on the map and identified each click response with the corresponding area range. During which we came up and identified several problems and solved those difficulties as described below:</p>
 <ul>
 <li><p><strong><em>Reducing dataset and identifying the information of taxi zones specifically within Manhattan.</em></strong><br />
@@ -416,12 +395,15 @@ Regarding our original code, the same location could not be clicked twice which 
 We had several branches while we were dealing with our codes, and all codes would be pushed to our personal branch first before finally merging into the main branch. As we had two people mainly dealing with the <code>Shiny</code> application that needed cooperation work, it required a lot of merging process and there were several times when code overlapped or merging problems on local paths arose. Solving this problem required constant updates between members. <!-- - Click function?(km)   --> <!-- - Host interactive R shiny application on Github over the web. (km)   --></p></li>
 </ul>
 </div>
-<div id="analysis-and-summaries" class="section level4">
-<h4>Analysis and Summaries</h4>
+<div id="analysis-and-summaries" class="section level2">
+<h2>Analysis and Summaries</h2>
 <p>Some major findings are worth pointing out from the velocity heatmap.</p>
-<p><strong><em>Taxi vs Bike</em></strong></p>
+<div id="taxi-vs-bike" class="section level4">
+<h4><strong><em>Taxi vs Bike</em></strong></h4>
 <p>From the heat map, we found that the mean velocity of taking taxi is still faster compared to riding a bike overall. However, riding bikes during rush hour in Manhattan is competitive to take a taxi while only travelling across the nearby taxi zones in Midtown. That means cabs will not save you more time when you only cycle between midtown but cost you more based on marketing price, especially for shorter trips. The usage of both bikes and cabs are of more need during daytime and become less after sunset which follows our travel habit. Moreover, people would be more likely to take a taxi to travel across more taxi zone areas compared to riding bikes.</p>
-<p><strong><em>The Velocity of Taxi Zones</em></strong></p>
+</div>
+<div id="the-velocity-of-taxi-zones" class="section level4">
+<h4><strong><em>The Velocity of Taxi Zones</em></strong></h4>
 <p>As we know the midtown of Manhattan is known for its bustling and busy traffic, the mean velocity in midtown is significantly slower compared to neighborhoods in Uppertown and Downtown. Moreover, the velocity in Uppertown and Randalls Island would be even quicker. We notice that the traffic on Randalls Island usually performs better, and this might because of the lower population density. We also known from the web that this is a parkland island and there is no residential housing for the general public except for some public facilities. And the specific traffic time would be more dependent on where you are coming from and where you are going to.</p>
 <p>What is worth emphasizing here is that the more taxi zones that you cross, the faster velocity that we might obtain no matter where our pick up location is and what our transport is. We guess it might be because of the longer travel distance we have, the drivers or riders would more likely to choose the high way, the road with low traffic and avoid traffic lights.</p>
 </div>
