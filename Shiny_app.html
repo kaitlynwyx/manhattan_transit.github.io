@@ -385,16 +385,21 @@ div.tocify {
 <h2>Interaction Maps</h2>
 <p>The data visualization above is an overall analysis, in order to analyze the velocity between from one taxi zone to the others through different vehicles and show their geographical locations clearly, we created <strong><em>two interactive map applications</em></strong> using <code>R Shiny</code>.</p>
 <div id="velocity-heatmap" class="section level4">
-<h4><a href="http://35.231.167.210:3838/heatmap/"><strong>Velocity Heatmap</strong></a></h4>
+<h4><a href="http://34.138.2.255:3838/heatmap/"><strong>Velocity Heatmap</strong></a></h4>
 <p>Velocity heatmap is aimed to provide a tool to better analyze the velocity differences among different taxi zones during different times of the day in different months. To create this velocity heatmap, we first integrated the leaflet package to incorporate a worldwide map, drew polygons on Manhattan and divided the areas based on the taxi zone map. Adding click actions on the map is also necessary for there are 69 taxi zones, making it hard to select taxi zones through traditional methods, like select boxes.</p>
 <p>Users are able to navigate through this velocity heatmap by selecting desired zone, vehicle type, month, day and time to compare the speed. By clicking the relative taxi zone as our departure, it helps to explore and calculate the mean speed rate to different taxi zones, and create interactive plots that respond to each mouse event, combined with R’s graphics functions.</p>
+<center>
+<p><img src="picture/velocity_map.png" width="700" /></p>
+<center/>
 </div>
 <div id="choose-best-vehicle" class="section level4">
-<h4><a href="http://35.231.167.210:3838/bestvehicle/"><strong>Choose Best Vehicle</strong></a></h4>
+<h4><a href="http://34.138.2.255:3838/bestvehicle/"><strong>Choose Best Vehicle</strong></a></h4>
 <p>Besides comparing the speed from a fixed taxi zone to others, we also create an interactive map application to compare the speed from one taxi zone to another through taxi, bike and subway to see which one is the best during different times of the day in different months.</p>
-While using this app, the users would be able to choose whatever the departure taxi zone and destination taxi zone are within Manhattan using graphic straightforward clicking. With the synchronous web search for either pick up or drop off location. </span>
+<p>While using this app, the users would be able to choose whatever the departure taxi zone and destination taxi zone are within Manhattan using graphic straightforward clicking. With the synchronous web search for either pick up or drop off location.</p>
+<center>
+<img src="picture/choose_best_vehicle.png" width="700" />
 <center/>
-<!-- <img src="./pictures/resume_fc_2021.jpg" style = "width:9100%">  -->
+<center/>
 <hr />
 </div>
 <div id="problems-we-met" class="section level4">
